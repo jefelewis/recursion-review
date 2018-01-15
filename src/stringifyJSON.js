@@ -29,8 +29,7 @@ var stringifyJSON = function(obj) {
   if (Array.isArray(obj)) {
     if (!(obj.length)){
       return '[]';
-    }
-    else{
+    } else{
       obj = obj.map(function (elem) {
         return stringifyJSON(elem);
       });
