@@ -15,19 +15,9 @@ var getElementsByClassName = function(className, node
   if(part.indexOf(className) >= 0){
     arr.push(nodeList);
   }
-
-  // nodeList.forEach(function(node) {
-  //   if (node.classList === '') {
-  //     getElementsByClassName(className, node)
-  //   //   arr.push(node);
-  //     console.log(node.classList);
-  //   }
-  // });
-  // console.log(arr);
-
  
   for (var i = 0; i < nodeList.children.length; i++){
-    var output = getElementsByClassName(className, nodeList);
+    var output = getElementsByClassName(className, nodeList.children[i]);
     arr = arr.concat(output);
   }
 
