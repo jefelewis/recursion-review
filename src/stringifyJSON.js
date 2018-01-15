@@ -4,7 +4,6 @@
 // but you don't so you're going to write it from scratch:
 
 var stringifyJSON = function(obj) {
-  console.log(obj);
   // Undefined
   if( typeof obj === 'undefined'){
     return 'undefined';
