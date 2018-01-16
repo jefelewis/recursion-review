@@ -5,6 +5,11 @@
 var parseJSON = function(json) {
   console.log(json);
 
+  // function removeQuotes(str){
+  //   return str.replace(/\"/g, "")
+  // }
+
+  
 
   // Indexes
   var startIndex = json.slice(0,1);
@@ -20,6 +25,15 @@ var parseJSON = function(json) {
       return false;
     }
 
+    // String
+    if (typeof value === 'string') {
+      if (value.length === 2) {
+        return '';
+      } else {
+        return value;
+      }
+    }
+
     // Number
     if (typeof Number(json) === 'number' && Number(json) !== NaN) {
       return Number(json);
@@ -30,10 +44,7 @@ var parseJSON = function(json) {
       return undefined;
     }
     
-    // String
-    if (value.length === 1) {
-      return '';
-    }
+    
   };
 
 
@@ -44,12 +55,18 @@ var parseJSON = function(json) {
     // Array stuff
     if (json.length === 2) {
       return [];
+    } else {
+      // Array with contents
+      var content = json.slice(1, - 1).split(", ");
+      // console.log('***' + content);
+      return content.map(function (elem) {
+        return helper(elem);
+      });
+      // console.log('CONTENT ' + Array.isArray(content));
     }
 
-    // Array with contents
-    // var splittedArray = json.split(",");
-    var convertedArray = json.slice(1,json.length);
-    console.log(convertedArray);
+    
+    
 
 
   }
@@ -59,17 +76,18 @@ var parseJSON = function(json) {
     // Empty Object
     if(json.length === 2){
       return {};
+    } else {
+      // Object with contents
+      var obj = {};
+      var content = json.slice(1, json.length - 1);
+      content.split(',').forEach(function (prop) {
+        var propArr = prop.split(': ');
+        obj[propArr[0]] = helper(propArr[1]);
+      });
+      return obj;
     }
     
-    // Object with contents
-    var obj = {};
-    var content = json.slice(1, json.length - 2);
-    content.split(',').forEach(function (prop) {
-      var propArr = prop.split(': ');
-      obj[propArr[0]] = helper(propArr[1]);
-    });
-    // console.log(obj);
-    return obj;
+    
   }
 
 
